@@ -23,6 +23,10 @@ The goals / steps of this project are the following:
 [image3]: ./output_images/undistorted_chessboard.jpg "Chessboard Undistorted"
 [image4]: ./output_images/undistortion.jpg "Road Transformed"
 
+[image5]: ./output_images/thresholded.png "Road Thresholded"
+
+
+
 [image9]: ./examples/binary_combo_example.jpg "Binary Example"
 [image9]: ./examples/warped_straight_lines.jpg "Warp Example"
 [image9]: ./examples/color_fit_lines.jpg "Fit Visual"
@@ -84,8 +88,11 @@ Then I found using S channel alone cannot solve the problem completely, and the 
 It is also possible to apply H threshold so that only valid lane colors will be selected. However, this is very tricky to implement since the H value for white color is undefined.
 
 
+Original:
+![alt text][image4]
 
-![alt text][image3]
+Binary:
+![alt text][image5]
 
 #### 3. Describe how (and identify where in your code) you performed a perspective transform and provide an example of a transformed image.(Step 5)
 
