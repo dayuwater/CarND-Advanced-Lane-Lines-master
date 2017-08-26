@@ -18,9 +18,11 @@ The goals / steps of this project are the following:
 [//]: # (Image References)
 
 [image1]: ./camera_cal/calibration1.jpg "Original Chessboard"
-[image2]: ./test_images/test1.jpg "Original Road"
+[image2]: ./test_images/test2.jpg "Original Road"
+
 [image3]: ./output_images/undistorted_chessboard.jpg "Chessboard Undistorted"
 [image4]: ./output_images/undistortion.jpg "Road Transformed"
+
 [image9]: ./examples/binary_combo_example.jpg "Binary Example"
 [image9]: ./examples/warped_straight_lines.jpg "Warp Example"
 [image9]: ./examples/color_fit_lines.jpg "Fit Visual"
@@ -50,7 +52,9 @@ I start by preparing "object points", which will be the (x, y, z) coordinates of
 
 I then used the output `objpoints` and `imgpoints` to compute the camera calibration and distortion coefficients using the `cv2.calibrateCamera()` function.  I applied this distortion correction to the test image using the `cv2.undistort()` function and obtained this result: 
 
+Original:
 ![alt text][image1]
+Transformed:
 ![alt text][image3]
 
 Because the camera calibration matrix is the same throughout this project, I put the code related to calculation of the matrix into a separate code block in the notebooks. This can make the pipeline works in a consistent way and increases speed.
@@ -61,7 +65,9 @@ Because the camera calibration matrix is the same throughout this project, I put
 
 This step is implemented in `cal_undistort(img)` from Line 81-84. I use `cv2.undistort()` to undistort the image using the camera and calibration matrix calculated in the previous step.
 Here is the example:
+Original:
 ![alt text][image2]
+Transformed:
 ![alt text][image4]
 
 
