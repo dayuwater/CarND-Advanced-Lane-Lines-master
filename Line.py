@@ -268,6 +268,7 @@ def find_lanes(source_img, img, Minv, reuse = False, left_lane = None, right_lan
     ploty = np.linspace(0, img.shape[0]-1, img.shape[0] )
     left_fitx = left_fit[0]*ploty**2 + left_fit[1]*ploty + left_fit[2]
     right_fitx = right_fit[0]*ploty**2 + right_fit[1]*ploty + right_fit[2]
+    # y_eval is the maximum y dimension
     y_eval = np.max(ploty)
     
     # Create an image to draw the lines on
@@ -295,12 +296,9 @@ def find_lanes(source_img, img, Minv, reuse = False, left_lane = None, right_lan
     # Define conversions in x and y from pixels space to meters
     ym_per_pix = 30/720 # meters per pixel in y dimension
     xm_per_pix = 3.7/700 # meters per pixel in x dimension
-    # Fit new polynomials to x,y in world space
-    left_fit_cr = np.polyfit(ploty*ym_per_pix, np.random.choice(leftx,len(ploty))*xm_per_pix, 2)
-    right_fit_cr = np.polyfit(ploty*ym_per_pix, np.random.choice(rightx,len(ploty))*xm_per_pix, 2)
-    # Calculate the new radii of curvature
-    left_curverad = ((1 + (2*left_fit_cr[0]*y_eval*ym_per_pix + left_fit_cr[1])**2)**1.5) / np.absolute(2*left_fit_cr[0])
-    right_curverad = ((1 + (2*right_fit_cr[0]*y_eval*ym_per_pix + right_fit_cr[1])**2)**1.5) / np.absolute(2*right_fit_cr[0])
+    
+    left_curverad = ((1 + (2*left_fit[0]*y_eval*ym_per_pix + left_fit[1])**2)**1.5) / np.absolute(2*left_fit[0])
+    right_curverad = ((1 + (2*right_fit[0]*y_eval*ym_per_pix + right_fit[1])**2)**1.5) / np.absolute(2*right_fit[0])
     # Now our radius of curvature is in meters
 #     print(left_curverad, 'm', right_curverad, 'm')
     # negative = right, positive = left
