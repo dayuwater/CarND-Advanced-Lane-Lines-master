@@ -25,13 +25,13 @@ The goals / steps of this project are the following:
 
 [image5]: ./output_images/thresholded.png "Road Thresholded"
 
+[image6]: ./output_images/warped.png "Road Warped"
+[image7]: ./test_images/straight_lines1.jpg "Straight"
+[image8]: ./output_images/straight_warped.png "Straight Warped"
 
-
-[image9]: ./examples/binary_combo_example.jpg "Binary Example"
-[image9]: ./examples/warped_straight_lines.jpg "Warp Example"
-[image9]: ./examples/color_fit_lines.jpg "Fit Visual"
-[image9]: ./examples/example_output.jpg "Output"
-[video1]: ./project_video.mp4 "Video"
+[image9]: ./output_images/fit_polynomial.jpg "Fit Visual"
+[image10]: ./output_images/test2.jpg "Output"
+[video1]: ./output_video.mp4 "Video"
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/571/view) Points
 
@@ -108,12 +108,17 @@ dst = np.float32([[325,700],[325,0],[950,0],[950,700]])
  
  I use `cv2.getPerspectiveTransform(src, dst)` to get the transformation matrix, and `cv2.getPerspectiveTransform(dst, src)` to get the inverse transformation matrix. Then I use ` cv2.warpPerspective()` to transform the image
 
+Original:
 ![alt text][image4]
+Warped:
+![alt text][image6]
 
 I used a straight line image to check the correctness of the coordinates
 
-![alt text][image4]
-![alt text][image4]
+Original:
+![alt text][image7]
+Warped:
+![alt text][image8]
 
 #### 4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
 
@@ -135,9 +140,7 @@ rightx_base = np.argmax(histogram[midpoint:]) + midpoint
 ```
 Then I used sliding-window search to find lane pixels from the bottom of the image to the top. If there are enough lane pixels found, the window will be slide to the mean of the found pixels so that it can keep finding the lanes.
 
-
-
-![alt text][image5]
+![alt text][image9]
 
 #### 5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
 
@@ -153,7 +156,7 @@ I used the pixel - meter conversion rate presented in the given code to calculat
 
 
 
-I then used the equation that calculates the curvature from a polynomial in Lesson 35 to calculate the curvature in real world.
+I then used the equation that calculates the curvature from a polynomial in Lesson 35 to calculate the curvature in real world. Note `y_eval` is the maximum value in y axis.
 
 ```python
 # Calculate the new radii of curvature
@@ -181,7 +184,7 @@ I used `cv2.warpPerspective` using the inverse matrix calculated before to trans
 
 
 
-![alt text][image6]
+![alt text][image10]
 
 
 ---
