@@ -159,16 +159,21 @@ I used the pixel - meter conversion rate presented in the given code to calculat
 I then used the equation that calculates the curvature from a polynomial in Lesson 35 to calculate the curvature in real world. Note `y_eval` is the maximum value in y axis.
 
 ```python
-# Calculate the new radii of curvature
-    left_curverad = ((1 + (2*left_fit[0]*y_eval*ym_per_pix + left_fit[1])**2)**1.5) / np.absolute(2*left_fit_cr[0])
-    right_curverad = ((1 + (2*right_fit[0]*y_eval*ym_per_pix + right_fit[1])**2)**1.5) / np.absolute(2*right_fit[0])
+
+    # Transform the points from pixel space to world space
+    left_fit_cr = np.polyfit(lefty*ym_per_pix, leftx*xm_per_pix, 2)
+    right_fit_cr = np.polyfit(righty*ym_per_pix, rightx*xm_per_pix, 2)
+    
+    # calculate the curvature
+    left_curverad = ((1 + (2*left_fit_cr[0]*y_eval*ym_per_pix + left_fit_cr[1])**2)**1.5) / np.absolute(2*left_fit_cr[0])
+    right_curverad = ((1 + (2*right_fit_cr[0]*y_eval*ym_per_pix + right_fit_cr[1])**2)**1.5) / np.absolute(2*right_fit_cr[0])
 ```
 
 In order to calculate the offset of the car from the center of the road, I calculated the average of x of the bottom position of the the left lane and right lane , and compare that to the center of the image.
 
 ```python
-offset = leftx_base - midpoint + rightx_base - midpoint
-    if offset < 0:
+offset = (leftx_base - midpoint + rightx_base - midpoint) / 2
+    if offset < 0:
         direction = "right"
     else:
         direction = "left"
